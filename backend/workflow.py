@@ -451,6 +451,7 @@ def run_career_workflow(user_message: str, session_state: dict) -> dict:
             }
 
     except Exception as e:
+        import traceback; traceback.print_exc()
         result = {
             "user_facing_message": "Something went wrong on my end — please try again in a moment.",
             "coaching_note": "",
