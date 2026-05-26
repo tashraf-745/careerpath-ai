@@ -1,5 +1,4 @@
 import uuid
-import os
 from fastapi import FastAPI, UploadFile, File, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -21,15 +20,10 @@ def startup():
     init_db()
 
 
-_frontend = os.getenv("FRONTEND_URL", "")
-_origins = ["http://localhost:5173", "http://127.0.0.1:5173"]
-if _frontend:
-    _origins.append(_frontend)
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
