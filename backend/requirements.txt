@@ -1,0 +1,11 @@
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.6
+openai>=1.57.0
+httpx>=0.28.0
+requests>=2.32.3
+pypdf>=4.3.1
+python-docx>=1.1.2
+python-dotenv>=1.0.1
+python-multipart>=0.0.12
+PyJWT>=2.8.0
+bcrypt>=4.0.0
