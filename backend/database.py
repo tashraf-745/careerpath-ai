@@ -7,6 +7,7 @@ DB_PATH = os.getenv("DB_PATH", "/tmp/careerpath.db")
 
 
 def get_conn() -> sqlite3.Connection:
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True) if os.path.dirname(DB_PATH) else None
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
