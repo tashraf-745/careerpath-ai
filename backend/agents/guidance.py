@@ -41,8 +41,13 @@ def career_guidance_agent(user_profile: dict, max_react_steps: int = 5, force_pl
     }
     permitted = STAGE_AFFORDANCES["assessment"]
 
-    # Skip ReAct loop if forced straight to plan
-    if not force_plan:
+    # Only do research once we have 3+ user turns of context, or when forced to plan.
+    # Early in the conversation the agent should just ask questions, not dump search results.
+    user_turns = sum(1 for m in history if m.get("role") == "user")
+    run_research = force_plan or user_turns >= 3
+
+    # Skip ReAct loop if forced straight to plan or not enough context yet
+    if not force_plan and run_research:
         for step in range(max_react_steps):
             thought_response = client.chat.completions.create(
                 model=MODEL,
